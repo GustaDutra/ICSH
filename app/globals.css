@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/* ============================================
+   iDraft Design System — globals.css
+   Monochromatic · Minimal · Editorial
+   ============================================ */
+
+:root {
+  /* === BASE === */
+  --background: oklch(96% 0 0);          /* #f5f5f5 — soft off-white page */
+  --foreground: oklch(10% 0 0);          /* #1a1a1a — near-black text */
+
+  /* === CARD === */
+  --card: oklch(100% 0 0);               /* #ffffff — pure white cards */
+  --card-foreground: oklch(10% 0 0);     /* #1a1a1a */
+
+  /* === POPOVER / DROPDOWN / TOOLTIP === */
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(10% 0 0);
+
+  /* === PRIMARY (jet black — nav active, dark cards) === */
+  --primary: oklch(14% 0 0);             /* #222222 */
+  --primary-foreground: oklch(98% 0 0);  /* #fafafa */
+
+  /* === SECONDARY === */
+  --secondary: oklch(93% 0 0);           /* #ededed — light grey */
+  --secondary-foreground: oklch(14% 0 0);
+
+  /* === MUTED === */
+  --muted: oklch(91% 0 0);               /* #e8e8e8 */
+  --muted-foreground: oklch(48% 0 0);    /* #7a7a7a — medium grey */
+
+  /* === ACCENT === */
+  --accent: oklch(91% 0 0);
+  --accent-foreground: oklch(14% 0 0);
+
+  /* === DESTRUCTIVE === */
+  --destructive: oklch(52% 0.21 27);     /* red */
+  --destructive-foreground: oklch(98% 0 0);
+
+  /* === BORDERS & INPUTS === */
+  --border: oklch(88% 0 0);              /* #e0e0e0 */
+  --input: oklch(84% 0 0);              /* #d6d6d6 */
+  --ring: oklch(14% 0 0);               /* black focus ring */
+
+  /* === BORDER RADIUS === */
+  --radius: 0.75rem;                     /* 12px — matches card rounding */
+  --radius-sm: 0.5rem;                   /* 8px */
+  --radius-lg: 1rem;                     /* 16px */
+  --radius-xl: 1.25rem;                  /* 20px */
+  --radius-pill: 9999px;
+
+  /* === CHART COLORS === */
+  --chart-1: oklch(14% 0 0);             /* black */
+  --chart-2: oklch(55% 0 0);             /* mid grey */
+  --chart-3: oklch(75% 0 0);             /* light grey */
+  --chart-4: oklch(35% 0 0);             /* dark grey */
+  --chart-5: oklch(90% 0 0);             /* near white */
+
+  /* === SIDEBAR === */
+  --sidebar: oklch(100% 0 0);            /* white sidebar */
+  --sidebar-foreground: oklch(10% 0 0);
+  --sidebar-primary: oklch(14% 0 0);
+  --sidebar-primary-foreground: oklch(98% 0 0);
+  --sidebar-accent: oklch(93% 0 0);
+  --sidebar-accent-foreground: oklch(14% 0 0);
+  --sidebar-border: oklch(91% 0 0);
+  --sidebar-ring: oklch(14% 0 0);
+
+  /* === SEMANTIC COLORS === */
+  --success: oklch(52% 0.17 145);        /* green */
+  --success-foreground: oklch(98% 0 0);
+  --warning: oklch(68% 0.17 65);         /* amber */
+  --warning-foreground: oklch(14% 0 0);
+  --info: oklch(55% 0.18 240);           /* blue */
+  --info-foreground: oklch(98% 0 0);
+
+  /* === GREY SCALE (for palette display) === */
+  --grey-50:  oklch(97.5% 0 0);
+  --grey-100: oklch(95% 0 0);
+  --grey-200: oklch(91% 0 0);
+  --grey-300: oklch(85% 0 0);
+  --grey-400: oklch(74% 0 0);
+  --grey-500: oklch(60% 0 0);
+  --grey-600: oklch(48% 0 0);
+  --grey-700: oklch(36% 0 0);
+  --grey-800: oklch(24% 0 0);
+  --grey-900: oklch(14% 0 0);
+
+  /* === PRIMARY SCALE (jet → near white) === */
+  --primary-50:  oklch(97% 0 0);
+  --primary-100: oklch(93% 0 0);
+  --primary-200: oklch(86% 0 0);
+  --primary-300: oklch(74% 0 0);
+  --primary-400: oklch(58% 0 0);
+  --primary-500: oklch(42% 0 0);
+  --primary-600: oklch(30% 0 0);
+  --primary-700: oklch(22% 0 0);
+  --primary-800: oklch(16% 0 0);
+  --primary-900: oklch(10% 0 0);
+
+  /* === SHADOW TOKENS === */
+  --shadow-xs:  0 1px 2px 0 oklch(0% 0 0 / 0.05);
+  --shadow-sm:  0 2px 4px 0 oklch(0% 0 0 / 0.07), 0 1px 2px -1px oklch(0% 0 0 / 0.06);
+  --shadow-md:  0 4px 8px -1px oklch(0% 0 0 / 0.09), 0 2px 4px -2px oklch(0% 0 0 / 0.07);
+  --shadow-lg:  0 10px 20px -3px oklch(0% 0 0 / 0.1), 0 4px 8px -4px oklch(0% 0 0 / 0.08);
+  --shadow-xl:  0 20px 40px -5px oklch(0% 0 0 / 0.14), 0 8px 16px -6px oklch(0% 0 0 / 0.1);
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+.dark {
+  --background: oklch(9% 0 0);           /* #161616 */
+  --foreground: oklch(95% 0 0);          /* #f2f2f2 */
+
+  --card: oklch(14% 0 0);                /* #222222 */
+  --card-foreground: oklch(95% 0 0);
+
+  --popover: oklch(14% 0 0);
+  --popover-foreground: oklch(95% 0 0);
+
+  --primary: oklch(95% 0 0);             /* white primary in dark */
+  --primary-foreground: oklch(9% 0 0);
+
+  --secondary: oklch(20% 0 0);
+  --secondary-foreground: oklch(90% 0 0);
+
+  --muted: oklch(20% 0 0);
+  --muted-foreground: oklch(58% 0 0);
+
+  --accent: oklch(20% 0 0);
+  --accent-foreground: oklch(90% 0 0);
+
+  --destructive: oklch(58% 0.21 27);
+  --destructive-foreground: oklch(98% 0 0);
+
+  --border: oklch(22% 0 0);
+  --input: oklch(26% 0 0);
+  --ring: oklch(80% 0 0);
+
+  --sidebar: oklch(12% 0 0);
+  --sidebar-foreground: oklch(90% 0 0);
+  --sidebar-primary: oklch(90% 0 0);
+  --sidebar-primary-foreground: oklch(9% 0 0);
+  --sidebar-accent: oklch(20% 0 0);
+  --sidebar-accent-foreground: oklch(90% 0 0);
+  --sidebar-border: oklch(20% 0 0);
+  --sidebar-ring: oklch(80% 0 0);
+
+  --chart-1: oklch(90% 0 0);
+  --chart-2: oklch(65% 0 0);
+  --chart-3: oklch(45% 0 0);
+  --chart-4: oklch(30% 0 0);
+  --chart-5: oklch(20% 0 0);
+}
+
+/* ============================================
+   TAILWIND v4 THEME BRIDGE
+   ============================================ */
+@theme inline {
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --color-card:                 var(--card);
+  --color-card-foreground:      var(--card-foreground);
+  --color-popover:              var(--popover);
+  --color-popover-foreground:   var(--popover-foreground);
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+  --color-destructive:          var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border:               var(--border);
+  --color-input:                var(--input);
+  --color-ring:                 var(--ring);
+
+  --color-sidebar:              var(--sidebar);
+  --color-sidebar-foreground:   var(--sidebar-foreground);
+
+  --color-success:              var(--success);
+  --color-success-foreground:   var(--success-foreground);
+  --color-warning:              var(--warning);
+  --color-warning-foreground:   var(--warning-foreground);
+  --color-info:                 var(--info);
+  --color-info-foreground:      var(--info-foreground);
+
+  --color-chart-1:              var(--chart-1);
+  --color-chart-2:              var(--chart-2);
+  --color-chart-3:              var(--chart-3);
+  --color-chart-4:              var(--chart-4);
+  --color-chart-5:              var(--chart-5);
+
+  --radius-sm:                  var(--radius-sm);
+  --radius:                     var(--radius);
+  --radius-lg:                  var(--radius-lg);
+  --radius-xl:                  var(--radius-xl);
+  --radius-pill:                var(--radius-pill);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Plus Jakarta Sans", "DM Sans", system-ui, sans-serif;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Select item interaction states */
+.select-item[data-highlighted] {
+  background: oklch(22% 0 0);
+  color: oklch(98% 0 0);
+}
+.select-item[data-disabled] {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Select trigger disabled state */
+[data-radix-select-trigger][disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Select dropdown open/close animation */
+[data-radix-select-content] {
+  transform-origin: top center;
+  animation: select-in 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-radix-select-content][data-state="closed"] {
+  animation: select-out 0.1s ease-in;
+}
+@keyframes select-in {
+  from { opacity: 0; transform: scaleY(0.92) translateY(-4px); }
+  to   { opacity: 1; transform: scaleY(1)    translateY(0);    }
+}
+@keyframes select-out {
+  from { opacity: 1; transform: scaleY(1)    translateY(0);    }
+  to   { opacity: 0; transform: scaleY(0.92) translateY(-4px); }
+}
+
+/* Chevron rotation when trigger is open */
+[data-state="open"] > svg,
+[data-state="open"] .lucide-chevron-down {
+  transform: rotate(180deg);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-state="closed"] > svg,
+[data-state="closed"] .lucide-chevron-down {
+  transform: rotate(0deg);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
