@@ -206,7 +206,7 @@ export default function SpellListPage() {
           </div>
           <div>
             <h1 style={{ fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.02em", margin: 0, lineHeight: 1 }}>
-              Arcano
+              ICSH
             </h1>
             <p style={{ fontSize: "0.6875rem", color: "var(--muted-foreground)", margin: 0 }}>Lista de Magias</p>
           </div>
