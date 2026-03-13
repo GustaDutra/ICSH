@@ -9,8 +9,8 @@ const font = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "iDraft Design System",
-  description: "Monochromatic design system extracted from iDraft dashboard",
+  title: "ICSH",
+  description: "ICSH RPG website",
 }
 
 export default function RootLayout({

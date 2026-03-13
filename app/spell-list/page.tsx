@@ -211,7 +211,7 @@ export default function SpellListPage() {
           </div>
           <div>
             <h1 style={{ fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.02em", margin: 0, lineHeight: 1 }}>
-              Arcano
+              ICSH
             </h1>
             <p style={{ fontSize: "0.6875rem", color: "var(--muted-foreground)", margin: 0 }}>Lista de Magias</p>
           </div>
@@ -241,46 +241,32 @@ export default function SpellListPage() {
             />
           </div>
 
-          {/* School filter 
-          <select
-            value={misterioFilter}
-            onChange={(e) => setMisterioFilter(e.target.value)}
-            style={{
-              padding: "0.5rem 0.875rem",
-              background: "var(--muted)", border: "1.5px solid var(--border)",
-              borderRadius: "var(--radius-pill)", fontSize: "0.8125rem",
-              color: "var(--foreground)", outline: "none", fontFamily: "inherit",
-              cursor: "pointer", whiteSpace: "nowrap",
-            }}
-          >
-            {misterios.map((s) => <option key={s} value={s}>{s}</option>)}
-          </select>*/}
-
-        <Select value={misterioFilter} onValueChange={setMisterioFilter}>
-            <SelectTrigger style={{
-              width: 180,
-              borderRadius: "var(--radius-pill)",
-              background: "var(--primary)",
-              color: "var(--primary-foreground)",
-              border: "none",
-              fontSize: "0.8125rem",
-              fontFamily: "inherit",
-              cursor: "pointer",
-              transition: "opacity 0.15s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = "0.82"}
-            onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = "1"}
-            >
-              <SelectValue placeholder="Filtrar Mistério" />
-            </SelectTrigger>
-            <SelectContent style={{ maxHeight: "14rem", overflowY: "auto", textAlign: "center" }}>
-              <SelectItem value="all">Todos os Mistérios</SelectItem>
-              <SelectSeparator />
-              {misterios.map((s) => (
-                <SelectItem key={s} value={s}>{s}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+         <div style={{ width: 180, flexShrink: 0 }}>
+            <Select value={misterioFilter} onValueChange={setMisterioFilter}>
+              <SelectTrigger style={{
+                borderRadius: "var(--radius-pill)",
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+                border: "none",
+                fontSize: "0.8125rem",
+                fontFamily: "inherit",
+                cursor: "pointer",
+                transition: "opacity 0.15s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = "0.82"}
+              onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = "1"}
+              >
+                <SelectValue placeholder="Filtrar Mistério" />
+              </SelectTrigger>
+              <SelectContent style={{ maxHeight: "14rem", overflowY: "auto", textAlign: "center" }}>
+                <SelectItem value="all">Todos os Mistérios</SelectItem>
+                <SelectSeparator />
+                {misterios.map((s) => (
+                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
 
