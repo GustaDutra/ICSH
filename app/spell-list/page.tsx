@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useMemo } from "react"
+import { useState, useMemo } from "react"
 import { useLocalStorage } from "@/lib/useLocalStorage"
 import {
   Accordion,
