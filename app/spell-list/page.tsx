@@ -15,7 +15,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { useRouter } from "next/navigation"
 import SPELL from "@/app/spell-list/spells.json"
 
 
@@ -88,19 +87,13 @@ function MisterioBadge({ misterio }: { misterio?: string }) {
 
 
 function SpellCard({ spell, index }: { spell: Spell; index: number }) {
-  const router = useRouter()
-  // persist the last-clicked spell id in localStorage
-  const [, setLastClicked] = useLocalStorage<string | null>("arcano:lastSpell", null)
-
-  const handleClick = () => {
-    setLastClicked(spell.id)
-    router.push(`/spell-list/${spell.id}`)
-  }
-
   return (
-    <div 
-        onClick={handleClick}
-        style={{
+    <a
+      href={`/spell-list/${spell.id}`}
+      style={{
+        display: "block",
+        textDecoration: "none",
+        color: "inherit",
         background: "var(--card)",
         border: "1px solid var(--border)",
         borderRadius: "var(--radius)",
@@ -108,16 +101,18 @@ function SpellCard({ spell, index }: { spell: Spell; index: number }) {
         transition: "box-shadow 0.2s",
         cursor: "pointer",
         animationDelay: `${index * 40}ms`,
-      }}>
-      {/* Spell header */}
+      }}
+      onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)"}
+      onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.boxShadow = "none"}
+    >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 1rem", gap: "0.75rem" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", minWidth: 0 }}>
           <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--foreground)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {spell.nome}
           </span>
         </div>
-      </div> 
-    </div>
+      </div>
+    </a>
   )
 }
 
@@ -211,7 +206,7 @@ export default function SpellListPage() {
           </div>
           <div>
             <h1 style={{ fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.02em", margin: 0, lineHeight: 1 }}>
-              ICSH
+              Arcano
             </h1>
             <p style={{ fontSize: "0.6875rem", color: "var(--muted-foreground)", margin: 0 }}>Lista de Magias</p>
           </div>
@@ -241,7 +236,22 @@ export default function SpellListPage() {
             />
           </div>
 
-         <div style={{ width: 180, flexShrink: 0 }}>
+          {/* School filter 
+          <select
+            value={misterioFilter}
+            onChange={(e) => setMisterioFilter(e.target.value)}
+            style={{
+              padding: "0.5rem 0.875rem",
+              background: "var(--muted)", border: "1.5px solid var(--border)",
+              borderRadius: "var(--radius-pill)", fontSize: "0.8125rem",
+              color: "var(--foreground)", outline: "none", fontFamily: "inherit",
+              cursor: "pointer", whiteSpace: "nowrap",
+            }}
+          >
+            {misterios.map((s) => <option key={s} value={s}>{s}</option>)}
+          </select>*/}
+
+          <div style={{ width: 180, flexShrink: 0 }}>
             <Select value={misterioFilter} onValueChange={setMisterioFilter}>
               <SelectTrigger style={{
                 borderRadius: "var(--radius-pill)",
