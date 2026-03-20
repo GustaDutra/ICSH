@@ -5120,5 +5120,77 @@
   "duracao": "Até o final do seu próximo turno",
   "descricao": "Você canaliza as forças da não-vida para invocar brevemente um amálgama dos mortos vingativos abatidos por seus inimigos e aliados. Essa entidade manifesta-se como um grande tornado de rostos uivantes e intangíveis. Ela ocupa o espaço de uma criatura Enorme e possui deslocamento de 18 metros.\n\n**Chegada — Vórtice da Morte.** Cada criatura inimiga em uma emanação de 18 metros deve realizar um teste de Fortitude. Em um sucesso, a criatura fica drenada 1. Em uma falha, a criatura fica drenada 2.\n\n**Partida — Uivo da Eternidade.** Os mortos vingativos emitem um grito angustiado. Todos os seus inimigos em uma emanação de 30 metros devem realizar um teste de Vontade. Em um sucesso, criatura fica amedrontada 1.Em uma falha, a criatura fica amedrontada 3.",
   "nivel_superior": ""
-  }
+  },
+  {
+  "id": "eletrizar",
+  "misterio": ["Elétrico"],
+  "nome": "Eletrizar",
+  "nivel": 1,
+  "Tempo": "2 ações",
+  "Alcance": "9 metros",
+  "Componentes": "V, S",
+  "duracao": "Instantânea",
+  "descricao": "Um arco de relâmpago salta de um alvo para outro. Cada alvo sofre 2d4 de dano elétrico com um teste básico de Reflexos.",
+  "nivel_superior": "Ao conjurar essa magia com pontos base acima de 6° nível, o dano aumenta em 1d4 por nível."
+},
+{
+  "id": "fio-vivo",
+  "misterio": ["Elétrico"],
+  "nome": "Fio Vivo",
+  "nivel": 1,
+  "Tempo": "2 ações",
+  "Alcance": "9 metros",
+  "Componentes": "V, S",
+  "duracao": "Instantânea",
+  "descricao": "Você conjura um fio de cobre afiado vibrando com corrente elétrica que golpeia seu inimigo. O fio causa 1d4 de dano cortante e 1d4 de dano elétrico, dependendo do seu teste de ataque de magia contra a CA do alvo. Em um acerto crítico, o alvo sofre dano duplo e 1d4 de dano elétrico persistente. Em um sucesso, o alvo sofre dano total. E em uma falha: O alvo sofre apenas o dano elétrico, mas não o dano cortante.",
+  "nivel_superior": "Ao conjurar essa magia com pontos base 2 níveis acima do nível original, o dano cortante, o dano elétrico inicial e o dano elétrico persistente aumentam em 1d4 cada."
+},
+{
+  "id": "arma-condutora",
+  "misterio": ["Elétrico"],
+  "nome": "Arma Condutora",
+  "nivel": 1,
+  "Tempo": "2 ações",
+  "Alcance": "Toque",
+  "Componentes": "V, S",
+  "duracao": "1 minuto",
+  "descricao": "Você canaliza uma poderosa corrente elétrica através do metal de uma arma, chocando qualquer um que ela acertar. O alvo deve ser uma arma de metal sem dono ou portada por uma criatura voluntária. A arma se torna uma arma +1 de choque. Se algum alvo de um ataque com a arma estiver usando armadura de metal ou for feito primariamente de metal, o dado de dano elétrico da runa de choque é 1d12.",
+  "nivel_superior": ""
+},
+{
+  "id": "arma-condutora",
+  "misterio": ["Elétrico"],
+  "nome": "Arma Condutora",
+  "nivel": 1,
+  "Tempo": "2 ações",
+  "Alcance": "Toque",
+  "Componentes": "V, S",
+  "duracao": "1 minuto",
+  "descricao": "Você canaliza uma poderosa corrente elétrica através do metal de uma arma, chocando qualquer um que ela acertar. O alvo deve ser uma arma de metal sem dono ou portada por uma criatura voluntária. A arma se torna uma arma +1 de choque. Se algum alvo de um ataque com a arma estiver usando armadura de metal ou for feito primariamente de metal, o dado de dano elétrico da runa de choque é 1d12.",
+  "nivel_superior": ""
+},
+{
+  "id": "esfera-de-trovao-horizonte",
+  "misterio": ["Elétrico"],
+  "nome": "Esfera de Trovão do Horizonte",
+  "nivel": 1,
+  "Tempo": "2 ações, 3 ações ou 2 turnos",
+  "Alcance": "Varia",
+  "Componentes": "V, S",
+  "duracao": "Instantânea",
+  "descricao": "Você acumula energia mágica em sua palma, formando uma bola concentrada de eletricidade que estaleja e retumba como um trovão impossivelmente distante. Faça um teste de ataque de magia à distância contra a CA do alvo. Em um sucesso, você causa 3d6 de dano elétrico. O número de ações gastas ao conjurar esta magia determina o alcance e outros parâmetros.\n\n2 ações (somático, verbal): Esta magia tem alcance de 9 metros.\n\n3 ações (material, somático, verbal): Esta magia tem alcance de 18 metros e causa metade do dano em uma falha, pois a eletricidade se expande e atinge o alvo.\n\n2 Turnos: Se você gastar 3 ações para conjurar a magia, pode evitar finalizá-la e gastar mais 3 ações no seu próximo turno para potencializá-la ainda mais. Se fizer isso, após atacar o alvo, independentemente de acertar ou errar, a  bola de relâmpago explode causando 2d6 de dano elétrico a todas as outras criaturas em uma emanação de 3 metros ao redor do alvo (teste de Reflexos, metade do dano em sucesso). Além disso, você faísca com eletricidade por 1 minuto, causando 1 de dano elétrico a criaturas que te Agarrarem ou que te acertarem com um Golpe desarmado ou uma arma corpo a corpo sem alcance. Essa forma conta como uma 'Conjuração Máxima'",
+  "nivel_superior": "Ao conjurar essa magia com pontos base acima do nível original, o dano inicial em um acerto e o dano em área para o tempo de conjuração de dois turnos aumentam em 2d6 por nível, e o dano causado a criaturas que te Agarram ou te acertam enquanto você está faiscando aumenta em 1 por nível."
+},
+{
+  "id": "golpe-do-trovao",
+  "misterio": ["Elétrico"],
+  "nome": "Golpe do Trovão",
+  "nivel": 1,
+  "Tempo": "2 ações",
+  "Alcance": "36 metros",
+  "Componentes": "V, S",
+  "duracao": "Instantânea",
+  "descricao": "Você convoca um tendão de relâmpago que estoura com trovão, causando 1d12 de dano elétrico e 1d4 de dano sônico ao alvo com um teste básico de Reflexos. Um alvo usando armadura de metal ou feito de metal recebe –1 de bônus de circunstância no teste e, se for danificado pela magia, fica desajeitado 1 por 1 rodada.",
+  "nivel_superior": "Ao conjurar essa magia com pontos base acima do nível original, o dano aumenta em 1d12 elétrico e 1d4 sônico por nível."
+}
 ]
