@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useState, useMemo } from "react"
+import { useMemo } from "react"
 import { useLocalStorage } from "@/lib/useLocalStorage"
 import {
   Accordion,
@@ -15,81 +15,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import SPELL from "@/app/spell-list/spells.json"
+import RITUAL from "@/app/ritual-list/rituals.json"
 
-
-interface Spell {
+interface Ritual {
   id: string
   nome: string
   nivel: number
-  misterio: string[]
-  alcance?: string
-  duracao?: string
+  conjuradores: number
+  tempo: string
+  componentes: string
+  teste: string
   descricao?: string
+  nivel_superior?: string
 }
 
-
-const SPELLS: Spell[] = SPELL
-
-const MISTERIOS = [
-  "Astral", "Cronomancia", "Espaçomancia", "Gravitomancia", "Runomancia",
-  "Elemental Geral", "Água", "Fogo", "Terra", "Vento", "Elétrico", "Som",
-  "Flora", "Areia", "Veneno", "Metal", "Gelo", "Cristal", "Magma", "Sombra",
-  "Luz", "Advinhação", "Encantamento", "Étermancia", "Ilusão", "Invocação",
-  "Necromancia", "Oniromancia", "Transmutação", "Umbramancia",
-]
-
+const RITUALS: Ritual[] = RITUAL as Ritual[]
 const NIVEIS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const TESTES = ["Misticismo", "N/A"]
 
-/* ── PROCURAR ICONS ── */
-const MISTERIO_ICON: Record<string, string> = {
-  "Astral": "✦", "Cronomancia": "⧗", "Espaçomancia": "⬡", "Gravitomancia": "◉",
-  "Runomancia": "ᚱ", "Elemental Geral": "⬙", "Água": "", "Fogo": "",
-  "Terra": "", "Vento": "", "Elétrico": "", "Som": "",
-  "Flora": "✿", "Areia": "◇", "Veneno": "☠", "Metal": "",
-  "Gelo": "❄", "Cristal": "◆", "Magma": "◱", "Sombra": "",
-  "Luz": "", "Advinhação": "◉", "Encantamento": "", "Étermancia": "",
-  "Ilusão": "", "Invocação": "⬡", "Necromancia": "", "Oniromancia": "",
-  "Transmutação": "⬠", "Umbramancia": "",
-}
-
-/* TALVEZ mudar depois */
-const MISTERIO_COLOR: Record<string, { bg: string; color: string }> = {
-  "Evocação":     { bg: "var(--destructive)", color: "var(--destructive-foreground)" },
-  "Abjuração":    { bg: "var(--info)",        color: "var(--info-foreground)" },
-  "Transmutação": { bg: "var(--warning)",     color: "var(--warning-foreground)" },
-  "Conjuração":   { bg: "var(--success)",     color: "var(--success-foreground)" },
-  "Ilusão":       { bg: "var(--muted)",       color: "var(--muted-foreground)" },
-  "Necromancia":  { bg: "var(--primary)",     color: "var(--primary-foreground)" },
-  "Adivinhação":  { bg: "var(--secondary)",   color: "var(--secondary-foreground)" },
-  "Encantamento": { bg: "oklch(65% 0.15 290)", color: "white" },
-}
-
-
-function MisterioBadge({ misterio }: { misterio?: string }) {
-  if (!misterio) return null
-  const style = MISTERIO_COLOR[misterio] ?? { bg: "var(--muted)", color: "var(--muted-foreground)" }
-  return (
-    <span style={{
-      padding: "0.125rem 0.5rem",
-      borderRadius: "var(--radius-pill)",
-      background: style.bg,
-      color: style.color,
-      fontSize: "0.6875rem",
-      fontWeight: 700,
-      letterSpacing: "0.04em",
-      whiteSpace: "nowrap",
-    }}>
-      {misterio}
-    </span>
-  )
-}
-
-
-function SpellCard({ spell, index }: { spell: Spell; index: number }) {
+function RitualCard({ ritual, index }: { ritual: Ritual; index: number }) {
   return (
     <a
-      href={`/spell-list/${spell.id}`}
+      href={`/ritual-list/${ritual.id}`}
       style={{
         display: "block",
         textDecoration: "none",
@@ -106,25 +53,32 @@ function SpellCard({ spell, index }: { spell: Spell; index: number }) {
       onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.boxShadow = "none"}
     >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 1rem", gap: "0.75rem" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", minWidth: 0 }}>
-          <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--foreground)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-            {spell.nome}
-          </span>
+        <span style={{ fontSize: "0.8125rem", fontWeight: 700, color: "var(--foreground)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {ritual.nome}
+        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexShrink: 0 }}>
+          {ritual.conjuradores > 1 && (
+            <span style={{
+              fontSize: "0.6875rem", fontWeight: 700,
+              padding: "0.125rem 0.5rem", borderRadius: "var(--radius-pill)",
+              background: "var(--primary)", color: "var(--primary-foreground)",
+              whiteSpace: "nowrap",
+            }}>
+              {ritual.conjuradores} conjuradores
+            </span>
+          )}
         </div>
       </div>
     </a>
   )
 }
 
-function NivelSection({ nivel, misterio }: { nivel: number; misterio: string }) {
-  const spells = SPELLS.filter(
-    (s) => s.misterio.includes(misterio) && s.nivel === nivel
-  )
-  if (spells.length === 0) return null
+function NivelSection({ nivel, rituals }: { nivel: number; rituals: Ritual[] }) {
+  const filtered = rituals.filter((r) => r.nivel === nivel)
+  if (filtered.length === 0) return null
 
   return (
     <div style={{ marginBottom: "1.25rem" }}>
-      {/* Level pill */}
       <div style={{ display: "flex", alignItems: "center", gap: "0.625rem", marginBottom: "0.625rem" }}>
         <span style={{
           display: "inline-flex", alignItems: "center", justifyContent: "center",
@@ -138,52 +92,44 @@ function NivelSection({ nivel, misterio }: { nivel: number; misterio: string }) 
           Nível
         </span>
       </div>
-      {/* Spell cards */}
       <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
-        {spells.map((spell, i) => (
-          <SpellCard key={spell.id} spell={spell} index={i} />
+        {filtered.map((ritual, i) => (
+          <RitualCard key={ritual.id} ritual={ritual} index={i} />
         ))}
       </div>
     </div>
   )
 }
 
-/* ─────────────────────────────────────────────────────────────
-   MAIN PAGE
-───────────────────────────────────────────────────────────── */
-export default function SpellListPage() {
-  const [search, setSearch] = useLocalStorage("arcano:search", "")
+export default function RitualListPage() {
+  const [search, setSearch] = useLocalStorage("arcano:ritual:search", "")
   const [dark, setDark] = useLocalStorage("arcano:dark", false)
-  const [misterioFilter, setMisterioFilter] = useLocalStorage<string>("arcano:misterioFilter", "all")
-  const [openAccordions, setOpenAccordions] = useLocalStorage<string[]>("arcano:openAccordions", [])
+  const [nivelFilter, setNivelFilter] = useLocalStorage<string>("arcano:ritual:nivelFilter", "all")
+  const [testeFilter, setTesteFilter] = useLocalStorage<string>("arcano:ritual:testeFilter", "all")
+  const [openAccordions, setOpenAccordions] = useLocalStorage<string[]>("arcano:ritual:openAccordions", [])
 
-  const misterios = useMemo(() => {
-    const set = new Set(SPELLS.flatMap((s) => s.misterio))
-    return Array.from(set).sort()
-  }, [])
+  const visibleRituals = useMemo(() => {
+    return RITUALS.filter((r) => {
+      const matchSearch = !search ||
+        r.nome.toLowerCase().includes(search.toLowerCase()) ||
+        r.teste?.toLowerCase().includes(search.toLowerCase()) ||
+        r.componentes?.toLowerCase().includes(search.toLowerCase()) ||
+        r.descricao?.toLowerCase().includes(search.toLowerCase())
+      const matchNivel = nivelFilter === "all" || r.nivel === Number(nivelFilter)
+      const matchTeste = testeFilter === "all" || r.teste === testeFilter
+      return matchSearch && matchNivel && matchTeste
+    })
+  }, [search, nivelFilter, testeFilter])
 
-  /* Which mysteries have any spell matching current search/filter */
-  const activeMisterios = useMemo(() => {
-    if (!search && misterioFilter === "all") return new Set(MISTERIOS)
-    return new Set(
-      SPELLS
-        .filter((s) => {
-          const matchSearch = !search || s.nome.toLowerCase().includes(search.toLowerCase()) || (s.descricao?.toLowerCase().includes(search.toLowerCase()))
-          const matchMisterio = misterioFilter === "all" || s.misterio.includes(misterioFilter)
-          return matchSearch && matchMisterio
-        })
-        .flatMap((s) => s.misterio)
-    )
-  }, [search, misterioFilter])
+  // Which levels have visible rituals (for accordion opacity)
+  const activeLevels = useMemo(() => new Set(visibleRituals.map((r) => r.nivel)), [visibleRituals])
 
-  const totalSpells = SPELLS.length
-  const visibleSpells = useMemo(() => {
-    return SPELLS.filter((s) => {
-      const matchSearch = !search || s.nome.toLowerCase().includes(search.toLowerCase())
-      const matchMisterio = misterioFilter === "all" || s.misterio.includes(misterioFilter)
-      return matchSearch && matchMisterio
-    }).length
-  }, [search, misterioFilter  ])
+  const hasFilters = search || nivelFilter !== "all" || testeFilter !== "all"
+
+  // When filtering by level, only show that level's accordion
+  const accordionLevels = nivelFilter !== "all"
+    ? [Number(nivelFilter)]
+    : NIVEIS.filter((n) => RITUALS.some((r) => r.nivel === n))
 
   return (
     <div
@@ -200,7 +146,6 @@ export default function SpellListPage() {
         backdropFilter: "blur(8px)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
-          {/* Logo */}
           <div style={{ width: 32, height: 32, background: "var(--primary)", borderRadius: "var(--radius-sm)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <span style={{ color: "var(--primary-foreground)", fontSize: "1rem", lineHeight: 1 }}>✦</span>
           </div>
@@ -208,20 +153,20 @@ export default function SpellListPage() {
             <h1 style={{ fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.02em", margin: 0, lineHeight: 1 }}>
               ICSH
             </h1>
-            <p style={{ fontSize: "0.6875rem", color: "var(--muted-foreground)", margin: 0 }}>Lista de Magias</p>
+            <p style={{ fontSize: "0.6875rem", color: "var(--muted-foreground)", margin: 0 }}>Lista de Rituais</p>
           </div>
         </div>
 
         {/* Controls */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flex: 1, maxWidth: 560 }}>
-          {/* Search*/}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flex: 1, maxWidth: 640 }}>
+          {/* Search */}
           <div style={{ position: "relative", flex: 1 }}>
             <svg style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--muted-foreground)" }} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
             </svg>
             <input
               type="text"
-              placeholder="Buscar magia..."
+              placeholder="Buscar ritual..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               style={{
@@ -236,51 +181,55 @@ export default function SpellListPage() {
             />
           </div>
 
-          {/* School filter 
-          <select
-            value={misterioFilter}
-            onChange={(e) => setMisterioFilter(e.target.value)}
-            style={{
-              padding: "0.5rem 0.875rem",
-              background: "var(--muted)", border: "1.5px solid var(--border)",
-              borderRadius: "var(--radius-pill)", fontSize: "0.8125rem",
-              color: "var(--foreground)", outline: "none", fontFamily: "inherit",
-              cursor: "pointer", whiteSpace: "nowrap",
-            }}
-          >
-            {misterios.map((s) => <option key={s} value={s}>{s}</option>)}
-          </select>*/}
-
-          <div style={{ width: 180, flexShrink: 0 }}>
-            <Select value={misterioFilter} onValueChange={setMisterioFilter}>
+          {/* Nivel filter */}
+          <div style={{ width: 150, flexShrink: 0 }}>
+            <Select value={nivelFilter} onValueChange={setNivelFilter}>
               <SelectTrigger style={{
                 borderRadius: "var(--radius-pill)",
-                background: "var(--primary)",
-                color: "var(--primary-foreground)",
-                border: "none",
-                fontSize: "0.8125rem",
-                fontFamily: "inherit",
-                cursor: "pointer",
-                transition: "opacity 0.15s",
+                background: "var(--primary)", color: "var(--primary-foreground)",
+                border: "none", fontSize: "0.8125rem", fontFamily: "inherit",
+                cursor: "pointer", transition: "opacity 0.15s",
               }}
               onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = "0.82"}
               onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = "1"}
               >
-                <SelectValue placeholder="Filtrar Mistério" />
+                <SelectValue placeholder="Nível" />
               </SelectTrigger>
               <SelectContent style={{ maxHeight: "14rem", overflowY: "auto", textAlign: "center" }}>
-                <SelectItem value="all">Todos os Mistérios</SelectItem>
+                <SelectItem value="all">Todos os Níveis</SelectItem>
                 <SelectSeparator />
-                {misterios.map((s) => (
-                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                {NIVEIS.filter((n) => RITUALS.some((r) => r.nivel === n)).map((n) => (
+                  <SelectItem key={n} value={String(n)}>Nível {n}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Teste filter */}
+          <div style={{ width: 150, flexShrink: 0 }}>
+            <Select value={testeFilter} onValueChange={setTesteFilter}>
+              <SelectTrigger style={{
+                borderRadius: "var(--radius-pill)",
+                background: "var(--primary)", color: "var(--primary-foreground)",
+                border: "none", fontSize: "0.8125rem", fontFamily: "inherit",
+                cursor: "pointer", transition: "opacity 0.15s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = "0.82"}
+              onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = "1"}
+              >
+                <SelectValue placeholder="Teste" />
+              </SelectTrigger>
+              <SelectContent style={{ textAlign: "center" }}>
+                <SelectItem value="all">Todos os Testes</SelectItem>
+                <SelectSeparator />
+                {TESTES.map((t) => (
+                  <SelectItem key={t} value={t}>{t}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
         </div>
 
-
-        
         {/* Dark mode */}
         <button
           onClick={() => setDark(!dark)}
@@ -328,15 +277,15 @@ export default function SpellListPage() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.75rem" }}>
           <div>
             <h2 style={{ fontSize: "1.5rem", fontWeight: 800, letterSpacing: "-0.03em", margin: "0 0 0.25rem" }}>
-              Mistérios
+              Rituais
             </h2>
             <p style={{ fontSize: "0.875rem", color: "var(--muted-foreground)", margin: 0 }}>
-              {activeMisterios.size} mistérios · {visibleSpells} de {totalSpells} magias
+              {visibleRituals.length} de {RITUALS.length} rituais
             </p>
           </div>
-          {search || misterioFilter !== "all" ? (
+          {hasFilters && (
             <button
-              onClick={() => { setSearch(""); setMisterioFilter("all"); setOpenAccordions([]) }}
+              onClick={() => { setSearch(""); setNivelFilter("all"); setTesteFilter("all"); setOpenAccordions([]) }}
               style={{
                 padding: "0.375rem 0.875rem", borderRadius: "var(--radius-pill)",
                 border: "1.5px solid var(--border)", background: "transparent",
@@ -346,27 +295,23 @@ export default function SpellListPage() {
             >
               Limpar filtros ✕
             </button>
-          ) : null}
+          )}
         </div>
 
-        {/* Accordions — one per Mistério */}
+        {/* Accordions — one per level */}
         <Accordion
           type="multiple"
-          value={misterioFilter !== "all" ? [misterioFilter] : openAccordions}
-          onValueChange={(vals) => { if (misterioFilter === "all") setOpenAccordions(vals) }}
+          value={nivelFilter !== "all" ? [nivelFilter] : openAccordions}
+          onValueChange={(vals) => { if (nivelFilter === "all") setOpenAccordions(vals) }}
         >
-          {(misterioFilter !== "all" ? [misterioFilter] : MISTERIOS).map((misterio) => {
-            const isActive = activeMisterios.has(misterio)
-            const spellCount = SPELLS.filter((s) =>
-              s.misterio.includes(misterio) &&
-              (misterioFilter === "all" || s.misterio.includes(misterioFilter)) &&
-              (!search || s.nome.toLowerCase().includes(search.toLowerCase()))
-            ).length
+          {accordionLevels.map((nivel) => {
+            const isActive = activeLevels.has(nivel)
+            const nivelKey = String(nivel)
 
             return (
               <AccordionItem
-                key={misterio}
-                value={misterio}
+                key={nivelKey}
+                value={nivelKey}
                 style={{ opacity: isActive ? 1 : 0.35, transition: "opacity 0.2s" }}
               >
                 <AccordionTrigger
@@ -374,34 +319,25 @@ export default function SpellListPage() {
                   className={isActive ? "" : "pointer-events-none"}
                 >
                   <span style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
-                    {/* Icon */}
                     <span style={{
                       width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center",
                       background: "var(--muted)", borderRadius: "var(--radius-sm)",
-                      fontSize: "1rem", flexShrink: 0, fontFamily: "monospace",
+                      fontSize: "0.875rem", fontWeight: 800, flexShrink: 0,
                     }}>
-                      {MISTERIO_ICON[misterio] ?? "◈"}
+                      {nivel}
                     </span>
-                    {/* Name */}
                     <span style={{ fontSize: "0.9375rem", fontWeight: 700, letterSpacing: "-0.01em" }}>
-                      {misterio}
+                      Nível {nivel}
                     </span>
                   </span>
                 </AccordionTrigger>
 
                 <AccordionContent>
                   <div style={{ padding: "0.5rem 0 0.75rem 2.875rem" }}>
-                    {NIVEIS.map((nivel) => (
-                      
-                      <NivelSection
-                        key={nivel}
-                        nivel={nivel}
-                        misterio={misterio}
-                      />
-                    ))}
-                    {spellCount === 0 && (
+                    <NivelSection nivel={nivel} rituals={visibleRituals} />
+                    {!activeLevels.has(nivel) && (
                       <p style={{ fontSize: "0.875rem", color: "var(--muted-foreground)", fontStyle: "italic" }}>
-                        Nenhuma magia encontrada para este filtro.
+                        Nenhum ritual encontrado para este filtro.
                       </p>
                     )}
                   </div>
@@ -410,6 +346,13 @@ export default function SpellListPage() {
             )
           })}
         </Accordion>
+
+        {visibleRituals.length === 0 && (
+          <div style={{ textAlign: "center", padding: "4rem 2rem", color: "var(--muted-foreground)" }}>
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>✦</div>
+            <p style={{ fontSize: "0.9375rem" }}>Nenhum ritual encontrado.</p>
+          </div>
+        )}
 
       </div>
     </div>
