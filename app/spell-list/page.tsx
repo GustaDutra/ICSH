@@ -35,7 +35,7 @@ const MISTERIOS = [
   "Astral", "Cronomancia", "Espaçomancia", "Gravitomancia", "Runomancia",
   "Elemental Geral", "Água", "Fogo", "Terra", "Vento", "Elétrico", "Som",
   "Flora", "Areia", "Veneno", "Metal", "Gelo", "Cristal", "Magma", "Sombra",
-  "Luz", "Advinhação", "Encantamento", "Étermancia", "Ilusão", "Invocação",
+  "Luz", "Adivinhação", "Encantamento", "Étermancia", "Ilusão", "Invocação",
   "Necromancia", "Oniromancia", "Transmutação", "Umbramancia",
 ]
 

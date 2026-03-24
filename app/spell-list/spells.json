@@ -3121,11 +3121,11 @@
     "Alcance":"Pessoal",
     "Componentes":"V, S",
     "duracao": "Até o ínicio do seu próximo turno",
-    "descricao": "Você levanta um escudo mágico de força. Isso conta como usar a ação Levantar um Escudo, concedendo a você um bônus de +1 na CA até o início do seu próximo turno, mas não requer uma mão para usar. Enquanto a magia estiver em efeito, você pode usar a reação Bloquear com Escudo com seu escudo mágico. O escudo possui Dureza 5. Você pode usar a reação da magia para reduzir dano de qualquer magia ou efeito mágico, mesmo que não cause dano físico. Após usar Bloquear com Escudo, a magia termina e você não pode conjurá-la novamente por 10 minutos.",
+    "descricao": "Você levanta um escudo mágico de força. Isso conta como usar a ação Levantar um Escudo, concedendo a você um bônus de +1 na sua Defesa Base até o início do seu próximo turno, mas não requer uma mão para usar. Enquanto a magia estiver em efeito, você pode usar a reação Bloquear com Escudo com seu escudo mágico. O escudo possui Dureza 5. Você pode usar a reação da magia para reduzir dano de qualquer magia ou efeito mágico, mesmo que não cause dano físico. Após usar Bloquear com Escudo, a magia termina e você não pode conjurá-la novamente por 10 minutos.",
     "nivel_superior": "Ao conjurar essa magia com pontos base 2 níveis acima do nível original, a dureza do escudo aumenta em 5."
     },
     {
-    "id": "armadura_mistíca",
+    "id": "armadura-mistica",
     "misterio": ["Runomancia", "Cristal", "Luz"],
     "nome": "Armadura Mística",
     "nivel": 1,
@@ -3133,8 +3133,8 @@
     "Alcance":"Pessoal",
     "Componentes":"V, S, M (um pedaço de metal no valor mínimo de 10$ por nível da magia)",
     "duracao": "24 horas",
-    "descricao": "Você se envolve em uma camada de energia mágica cintilante, protegendo seu corpo. Você ganha um bônus de item de +1 na CA e um modificador máximo de Destreza de +5. Enquanto estiver sob o efeito de Armadura Mística, você usa sua proficiência sem armadura para calcular sua CA.",
-    "nivel_superior": "Ao conjurar essa magia com pontos base de 4° nível, você ganha um bônus de item de +1 em testes de salvaguarda. No 6° nível, o bônus de item na CA aumenta para +2 e você ganha um bônus de item de +1 em testes de salvaguarda. No 8° nível, o bônus de item na CA permanece +2 e o bônus de item em testes de salvaguarda aumenta para +2. No 10° nível, o bônus de item na CA aumenta para +3 e o bônus de item em testes de salvaguarda aumenta para +3."
+    "descricao": "Você se envolve em uma camada de energia mágica cintilante, protegendo seu corpo. Você ganha um bônus de item de +3 de Defesa Natural e 3 de RD. Você não pode utilizar outras armaduras enquanto estiver usando Armadura Mística.",
+    "nivel_superior": "Ao conjurar essa magia com pontos base de 4° nível, você ganha um bônus de +1 em testes de salvaguarda. No 6° nível, o bônus na Defesa Natural aumenta para +4 e você ganha um bônus de +1 em testes de salvaguarda. No 8° nível, o bônus na Defesa Natural aumenta para +5 e o bônus em testes de salvaguarda aumenta para +2. No 10° nível, o bônus na Defesa Natural aumenta para +6 e o bônus em testes de salvaguarda aumenta para +3."
     },
     {
     "id": "teia",
@@ -5144,18 +5144,6 @@
   "duracao": "Instantânea",
   "descricao": "Você conjura um fio de cobre afiado vibrando com corrente elétrica que golpeia seu inimigo. O fio causa 1d4 de dano cortante e 1d4 de dano elétrico, dependendo do seu teste de ataque de magia contra a CA do alvo. Em um acerto crítico, o alvo sofre dano duplo e 1d4 de dano elétrico persistente. Em um sucesso, o alvo sofre dano total. E em uma falha: O alvo sofre apenas o dano elétrico, mas não o dano cortante.",
   "nivel_superior": "Ao conjurar essa magia com pontos base 2 níveis acima do nível original, o dano cortante, o dano elétrico inicial e o dano elétrico persistente aumentam em 1d4 cada."
-},
-{
-  "id": "arma-condutora",
-  "misterio": ["Elétrico"],
-  "nome": "Arma Condutora",
-  "nivel": 1,
-  "Tempo": "2 ações",
-  "Alcance": "Toque",
-  "Componentes": "V, S",
-  "duracao": "1 minuto",
-  "descricao": "Você canaliza uma poderosa corrente elétrica através do metal de uma arma, chocando qualquer um que ela acertar. O alvo deve ser uma arma de metal sem dono ou portada por uma criatura voluntária. A arma se torna uma arma +1 de choque. Se algum alvo de um ataque com a arma estiver usando armadura de metal ou for feito primariamente de metal, o dado de dano elétrico da runa de choque é 1d12.",
-  "nivel_superior": ""
 },
 {
   "id": "arma-condutora",
