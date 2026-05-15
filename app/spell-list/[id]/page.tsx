@@ -17,7 +17,7 @@ type Spell = {
   descricao: string
   nivel_superior: string
 }
-
+/*
 const ESCOLA_STYLE: Record<string, { bg: string; color: string }> = {
   Evocação:     { bg: "var(--destructive)", color: "var(--destructive-foreground)" },
   Abjuração:    { bg: "var(--info)",        color: "var(--info-foreground)" },
@@ -28,7 +28,7 @@ const ESCOLA_STYLE: Record<string, { bg: string; color: string }> = {
   Adivinhação:  { bg: "var(--secondary)",   color: "var(--secondary-foreground)" },
   Encantamento: { bg: "oklch(65% 0.15 290)", color: "white" },
 }
-
+*/
 const NIVEL_LABEL: Record<number, string> = {
   0: "Truque",
   1: "1° nível", 2: "2° nível", 3: "3° nível",

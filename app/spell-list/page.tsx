@@ -53,7 +53,7 @@ const MISTERIO_ICON: Record<string, string> = {
   "Transmutação": "⬠", "Umbramancia": "",
 }
 
-/* TALVEZ mudar depois */
+/* TALVEZ mudar depois 
 const MISTERIO_COLOR: Record<string, { bg: string; color: string }> = {
   "Evocação":     { bg: "var(--destructive)", color: "var(--destructive-foreground)" },
   "Abjuração":    { bg: "var(--info)",        color: "var(--info-foreground)" },
@@ -64,7 +64,24 @@ const MISTERIO_COLOR: Record<string, { bg: string; color: string }> = {
   "Adivinhação":  { bg: "var(--secondary)",   color: "var(--secondary-foreground)" },
   "Encantamento": { bg: "oklch(65% 0.15 290)", color: "white" },
 }
+*/
+/* ── Icons ── */
+function IconSun() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </svg>
+  )
+}
 
+function IconMoon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  )
+}
 
 function MisterioBadge({ misterio }: { misterio?: string }) {
   if (!misterio) return null
@@ -151,6 +168,7 @@ function NivelSection({ nivel, misterio }: { nivel: number; misterio: string }) 
 /* ─────────────────────────────────────────────────────────────
    MAIN PAGE
 ───────────────────────────────────────────────────────────── */
+
 export default function SpellListPage() {
   const [search, setSearch] = useLocalStorage("arcano:search", "")
   const [dark, setDark] = useLocalStorage("arcano:dark", false)
@@ -291,7 +309,7 @@ export default function SpellListPage() {
             cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
           }}
         >
-          {dark ? "☀" : "☾"}
+          {dark ? <IconSun /> : <IconMoon />}
         </button>
       </header>
 
@@ -348,7 +366,6 @@ export default function SpellListPage() {
             </button>
           ) : null}
         </div>
-
         {/* Accordions — one per Mistério */}
         <Accordion
           type="multiple"
